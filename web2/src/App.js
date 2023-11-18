@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React, { useState, useEffect} from 'react';
+import AuthRoutes from './components/auth-router/AuthRoutes';
+import Home from './components/home/Home';
+import { ToastContainer } from "react-toastify";
 import './App.css';
 
+export const UserContext = React.createContext();
+
 function App() {
+  const [logged, setLogged] = useState(false);
+  
+  useEffect(()=>{
+    const UserLogged = localStorage.getItem("isLogged"); 
+    if (UserLogged === "true") { 
+      setLogged(true);
+    }
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserContext.Provider value={setLogged}>
+      {logged ? (
+          <Home />
+        ) : (
+          <AuthRoutes />
+        )}
+      </UserContext.Provider>
+      <ToastContainer />
     </div>
   );
 }

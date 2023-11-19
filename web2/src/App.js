@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from 'react';
-import AuthRoutes from './components/auth-router/AuthRoutes';
-import Home from './components/home/Home';
+import AuthRoutes from './components/login/AuthRoutes';
 import { ToastContainer } from "react-toastify";
 import './App.css';
+import AppRouter from './AppRouter';
 
 export const UserContext = React.createContext();
 
@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <UserContext.Provider value={setLogged}>
       {logged ? (
-          <Home />
+          <AppRouter />
         ) : (
           <AuthRoutes />
         )}

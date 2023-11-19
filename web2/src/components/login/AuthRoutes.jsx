@@ -4,9 +4,9 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import ErrorPage from "../login/ErrorPage";
-import Login from "../login/Login";
-import Signup from "../login/Signup";
+import ErrorPage from "./ErrorPage";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const AuthRoutes = () => {
   const routes = createBrowserRouter([

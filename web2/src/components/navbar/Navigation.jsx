@@ -62,7 +62,7 @@ const Navigation = () => {
           {userData && (
             <>
               <Typography variant="h6" sx={{ mr: 2 }}>
-                Welcome {userData.name}
+                Welcome {userData.name} 👋
               </Typography>
               <IconButton
                 size="large"

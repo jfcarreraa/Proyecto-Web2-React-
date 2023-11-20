@@ -38,14 +38,6 @@ const Navigation = () => {
             variant="h6"
             component={Link}
             to="/"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            Home
-          </Typography>
-          <Typography
-            variant="h6"
-            component={Link}
-            to="/posts"
             style={{
               textDecoration: "none",
               color: "inherit",

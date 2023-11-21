@@ -14,7 +14,7 @@ import { db } from "../../firebase";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Admin.scss";
+import "./style.scss";
 
 const CreatePost = (props) => {
   const { onClose, open, onCreate } = props;
@@ -22,8 +22,6 @@ const CreatePost = (props) => {
   const [body, setBody] = useState("");
   const [reactions, setReactions] = useState(0);
   const [tags, setTags] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
   const [formError, setFormError] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("userData"));
@@ -54,17 +52,6 @@ const CreatePost = (props) => {
     }
   };
 
-  const handleAddComment = () => {
-    setComments((prevComments) => [...prevComments, newComment]);
-    setNewComment("");
-  };
-
-  const handleDeleteComment = (index) => {
-    const updatedComments = [...comments];
-    updatedComments.splice(index, 1);
-    setComments(updatedComments);
-  };
-
   const handleCreate = async () => {
     const collectionRef = collection(db, "posts");
     try {
@@ -74,7 +61,7 @@ const CreatePost = (props) => {
         User: user,
         Reactions: reactions,
         Tags: tags,
-        Comments: comments,
+        Comments: [],
       };
       const docRef = await addDoc(collectionRef, post);
       post.id = docRef.id;
@@ -94,7 +81,7 @@ const CreatePost = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!title || !body || !reactions || !tags.length || !comments.length) {
+    if (!title || !body || !reactions || !tags.length) {
       setFormError(true);
       return;
     }
@@ -106,8 +93,6 @@ const CreatePost = (props) => {
     setBody("");
     setReactions(0);
     setTags([]);
-    setComments([]);
-    setNewComment("");
   };
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -174,40 +159,6 @@ const CreatePost = (props) => {
               )}
             />
           </Grid>
-
-          <Grid item xs={12} sx={{ marginLeft: 2, marginRight: 2 }}>
-            <TextField
-              className="comment-container"
-              label="Comment"
-              autoComplete="off"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              fullWidth
-            />
-          </Grid>
-
-          <Grid item xs={12} sx={{ marginLeft: 2, marginRight: 2 }}>
-            <Button variant="outlined" onClick={handleAddComment}>
-              Add Comment
-            </Button>
-          </Grid>
-
-          {comments.map((comment, index) => (
-            <Grid
-              item
-              xs={12}
-              key={index}
-              sx={{ marginLeft: 2, marginRight: 2 }}
-            >
-              <TextField
-                label={`Comment ${index + 1}`}
-                value={comment}
-                fullWidth
-                disabled
-              />
-              <Button onClick={() => handleDeleteComment(index)}>X</Button>
-            </Grid>
-          ))}
 
           {formError && (
             <Grid item xs={12} justifyContent="flex-end">

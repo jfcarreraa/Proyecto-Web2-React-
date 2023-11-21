@@ -44,19 +44,19 @@ const Navigation = () => {
               marginLeft: "20px",
             }}
           >
-            Posts
+            Home
           </Typography>
           <Typography
             variant="h6"
             component={Link}
-            to="/admin"
+            to="/posts"
             style={{
               textDecoration: "none",
               color: "inherit",
               marginLeft: "20px",
             }}
           >
-            Admin
+            Posts
           </Typography>
           <div style={{ flexGrow: 1 }} />{" "}
           {userData && (

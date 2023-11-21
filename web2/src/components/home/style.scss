@@ -1,0 +1,100 @@
+.card {
+    width: 60%;
+    margin: 10px auto; 
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+
+  
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  
+    .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+  
+    .body {
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+  
+  .full-post-container {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  Button {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  
+  h4 {
+    color: #333;
+  }
+  
+  body1 {
+    color: #555;
+  }
+  
+  .subtitle2 {
+    color: #777;
+  }
+  
+  body2 {
+    color: #888;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #3f51b5;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+  
+    Button {
+      color: #fff;
+    }
+  }
+  
+  .dialog-content {
+    padding: 16px;
+  
+    List {
+      padding: 0;
+    }
+  
+    ListItem {
+      border-bottom: 1px solid #ddd;
+  
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  
+    ListItemText {
+      .MuiListItemText-primary {
+        font-weight: bold;
+        color: #333;
+      }
+  
+      .MuiListItemText-secondary {
+        color: #777;
+      }
+    }
+  }
+  

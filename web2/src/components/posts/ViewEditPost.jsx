@@ -12,9 +12,8 @@ import { setDoc, doc } from "@firebase/firestore";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Admin.scss";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../../firebase";
+import "./style.scss";
+import { db } from "../../firebase";
 
 const ViewEditPost = (props) => {
   const { onClose, open, object, onUpdate, flagView } = props;
@@ -23,7 +22,6 @@ const ViewEditPost = (props) => {
   const [reactions, setReactions] = useState(0);
   const [tags, setTags] = useState([]);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
   const [formError, setFormError] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("userData"));
@@ -64,17 +62,6 @@ const ViewEditPost = (props) => {
     }
   };
 
-  const handleAddComment = () => {
-    setComments((prevComments) => [...prevComments, newComment]);
-    setNewComment("");
-  };
-
-  const handleDeleteComment = (index) => {
-    const updatedComments = [...comments];
-    updatedComments.splice(index, 1);
-    setComments(updatedComments);
-  };
-
   const handleUpdate = async () => {
     const collectionRef = doc(db, "posts", object.object.id);
 
@@ -103,7 +90,7 @@ const ViewEditPost = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!title || !body || !reactions || !tags.length || !comments.length) {
+    if (!title || !body || !reactions || !tags.length) {
       setFormError(true);
       return;
     }
@@ -179,27 +166,6 @@ const ViewEditPost = (props) => {
             />
           </Grid>
 
-          {!flagView && (
-            <>
-              <Grid item xs={12} sx={{ marginLeft: 2, marginRight: 2 }}>
-                <TextField
-                  className="comment-container"
-                  label="Comment"
-                  autoComplete="off"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  fullWidth
-                />
-              </Grid>
-
-              <Grid item xs={12} sx={{ marginLeft: 2, marginRight: 2 }}>
-                <Button variant="outlined" onClick={handleAddComment}>
-                  Add Comment
-                </Button>
-              </Grid>
-            </>
-          )}
-
           {comments.map((comment, index) => (
             <Grid
               item
@@ -213,9 +179,6 @@ const ViewEditPost = (props) => {
                 fullWidth
                 disabled
               />
-              {!flagView && (
-                <Button onClick={() => handleDeleteComment(index)}>X</Button>
-              )}
             </Grid>
           ))}
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
@@ -9,14 +9,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  updateDoc,
-} from "@firebase/firestore";
+import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../firebase";
 import "./style.scss";
 
@@ -76,7 +69,6 @@ const FullPost = () => {
             <span
               key={index}
               style={{ cursor: "pointer", textDecoration: "underline" }}
-              // You can keep or modify the handleTagClick function as needed
               onClick={() => console.log(`Clicked on tag: ${tag}`)}
             >
               {tag}

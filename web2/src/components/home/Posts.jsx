@@ -14,7 +14,6 @@ const Posts = () => {
   const [showMyPosts, setShowMyPosts] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Declare userData here
   const userData = JSON.parse(localStorage.getItem("userData")) || {};
 
   useEffect(() => {

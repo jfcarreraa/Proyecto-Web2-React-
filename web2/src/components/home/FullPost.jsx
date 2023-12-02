@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { doc, updateDoc } from "@firebase/firestore";
 import { db } from "../../firebase";
+import TagPostsModal from "./TagPostsModal";
 import "./style.scss";
 
 const FullPost = () => {
@@ -27,6 +28,11 @@ const FullPost = () => {
 
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState(post.Comments || []);
+  const [selectedTag, setSelectedTag] = useState(null);
+
+  const handleTagClick = (tag) => {
+    setSelectedTag(tag);
+  };
 
   const handleCommentSubmit = async () => {
     const updatedComments = [...comments, { body: newComment, user: userData }];
@@ -69,7 +75,7 @@ const FullPost = () => {
             <span
               key={index}
               style={{ cursor: "pointer", textDecoration: "underline" }}
-              onClick={() => console.log(`Clicked on tag: ${tag}`)}
+              onClick={() => handleTagClick(tag)}
             >
               {tag}
               {index < post.Tags.length - 1 && ", "}
@@ -109,6 +115,10 @@ const FullPost = () => {
           Add Comment
         </Button>
       </div>
+      <TagPostsModal
+        selectedTag={selectedTag}
+        onClose={() => setSelectedTag(null)}
+      />
     </Box>
   );
 };

@@ -97,6 +97,7 @@ const ViewEditPost = (props) => {
     handleUpdate();
     setFormError(false);
   };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle style={{ textAlign: "center" }}>
@@ -175,7 +176,7 @@ const ViewEditPost = (props) => {
             >
               <TextField
                 label={`Comment ${index + 1}`}
-                value={comment}
+                value={comment.body}
                 fullWidth
                 disabled
               />
